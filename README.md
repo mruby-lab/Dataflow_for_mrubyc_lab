@@ -1,0 +1,2 @@
+# Dataflow_for_mrubyc_lab
+Node-REDで扱うマイコン用ノードパッケージ，マイコン用Rubyコード生成器プログラム
