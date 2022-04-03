@@ -91,7 +91,7 @@ JSON_hash.map do |element|
   element[:id] = element[:id].to_sym
 end
 
-/よりデータを扱いやすく加工　「{NodeID => {プロパティ}}」の仕様にする/
+/よりデータを扱いやすく加工　「{NodeID => {プロパティ群}}」のデータ型にする/
 nodes_Hash = {}
 JSON_hash.each do |element|
 
@@ -126,7 +126,7 @@ end
 
 nodes_Hash.each do |element|
 
-  /ノードに前で接続されているノードID情報を付与する/
+  /対象ノードより前に接続されているノードID情報を付与する/
   input_ID = Find_InputID_fromID(element[0],nodes_Hash)
   element[1].store("inputNodeid".to_sym, input_ID)
 
@@ -138,7 +138,6 @@ nodes_Hash.each do |element|
   if element[1][:type].include?("function-Code")
     element[1][:type] = "function"
   end
-
 
   #debugノードといった削除されたノードIDが入っている各ノードの「wires」の整理
   element[1][:wires].each do |wires_array|
@@ -185,7 +184,7 @@ nodes_Hash.each do |element|
 
 end
 
-
+/---アプリケーション機能を担うノードプログラムの整理---/
 #functionノードの機能を「function.rb」としてプログラムを作成する。
 require "./Nodes/create_function.rb"
 functionNode_ids = []
@@ -252,8 +251,7 @@ nodes_Hash.each do |node|
   created_node_parts = created_node_parts.flatten
 
 end
-
-
+/------/
 
 /--------------Rboardに向けてソースプログラムを生成していく--------------/
 
